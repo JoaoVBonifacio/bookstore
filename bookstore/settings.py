@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Colocar o rest_framework aqui em baixo
     'rest_framework',
 ]
 
