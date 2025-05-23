@@ -37,11 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-<<<<<<< Updated upstream
-=======
     'django_extensions',
     'rest_framework',
->>>>>>> Stashed changes
     'order',
     'product',
     'debug_toolbar'
