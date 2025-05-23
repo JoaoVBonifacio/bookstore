@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'order',
     'product',
-    'debug_toolbar'
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
