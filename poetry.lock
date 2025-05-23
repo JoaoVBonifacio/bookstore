@@ -53,6 +53,8 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+<<<<<<< Updated upstream
+=======
 name = "django-debug-toolbar"
 version = "5.2.0"
 description = "A configurable set of panels that display various debug information about the current request/response."
@@ -303,11 +305,7 @@ files = [
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 content-hash = "3be58f05b7fcc6eed669134290fab52ee32914c178c35e5696c6b4c450e66b51"
-=======
-content-hash = "40d616541822af3a737b39b50d17f57ad6b79d2d05d6c190938ed9f789ffff05"
->>>>>>> Stashed changes
 =======
 content-hash = "40d616541822af3a737b39b50d17f57ad6b79d2d05d6c190938ed9f789ffff05"
 >>>>>>> Stashed changes
