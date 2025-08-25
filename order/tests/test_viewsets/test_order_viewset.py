@@ -16,9 +16,9 @@ class TestOrderViewSet(APITestCase):
     client = APIClient()
 
     def setUp(self):
-        self.user = UserFactory() # Cria um usuário
-        token = Token.objects.create(user=self.user) # Cria um token
-        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key) # Autentica o cliente
+        self.user = UserFactory()
+        token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
 
         self.category = CategoryFactory(title="technology")
         self.product = ProductFactory(
@@ -48,9 +48,9 @@ class TestOrderViewSet(APITestCase):
         )
 
     def test_create_order(self):
-        user = UserFactory()
+        # Não precisamos mais de um novo user, pois ele será o autenticado (self.user)
         product = ProductFactory()
-        data = json.dumps({"products_id": [product.id], "user": user.id})
+        data = json.dumps({"products_id": [product.id]})
 
         response = self.client.post(
             reverse("order-list", kwargs={"version": "v1"}),
@@ -60,4 +60,6 @@ class TestOrderViewSet(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        created_order = Order.objects.get(user=user)
+        created_order = Order.objects.get(user=self.user) # Use o usuário autenticado para buscar o pedido
+        self.assertEqual(created_order.user, self.user)
+        self.assertIn(product, created_order.product.all())

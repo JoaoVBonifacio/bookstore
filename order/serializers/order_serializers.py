@@ -3,15 +3,12 @@ from rest_framework import serializers
 from order.models import Order
 from product.models import Product
 from product.serializers.product_serializer import ProductSerializer
-from django.contrib.auth.models import User
+
 
 class OrderSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True, many=True)
     products_id = serializers.PrimaryKeyRelatedField(
         queryset=Product.objects.all(), write_only=True, many=True
-    )
-    user = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(), write_only=True
     )
     total = serializers.SerializerMethodField()
     
@@ -21,13 +18,13 @@ class OrderSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Order
-        fields = ["product", "products_id", "user", "total"]
+        fields = ["product", "products_id", "total"]
     
     def create(self, validated_data):
         products_data = validated_data.pop("products_id")
-        user_data = validated_data.pop("user")
         
-        order = Order.objects.create(user=user_data)
+        # O usuário será adicionado pelo viewset, então não precisamos dele aqui
+        order = Order.objects.create(**validated_data)
         for product in products_data:
             order.product.add(product)
             
