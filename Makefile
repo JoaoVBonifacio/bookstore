@@ -4,7 +4,7 @@ BUILD_DIR ?= build
 
 PYTEST_HTML_OPTIONS = --html=$(BUILD_DIR)/report.html --self-contained-html
 PYTEST_TAP_OPTIONS = --tap-combined --tap-outdir $(BUILD_DIR)
-PYTEST_COVERAGE_OPTIONS = --cov=$(LIBRARY_DIRS)
+PYTEST_COVERAGE_OPTIONS = --cov=bookstore
 PYTEST_OPTIONS ?= $(PYTEST_HTML_OPTIONS) $(PYTEST_TAP_OPTIONS) $(PYTEST_COVERAGE_OPTIONS)
 
 MYPY_OPTS ?= --python-version $(basename $(PYTHON_VERSION)) --show-column-numbers --pretty --html-report $(BUILD_DIR)/mypy
@@ -35,7 +35,7 @@ version-python:
 
 .PHONY: test
 test:
-	$(RUN_PYPKG_BIN) pytest $(PYTEST_OPTIONS) tests/*.py
+	$(RUN_PYPKG_BIN) pytest $(PYTEST_OPTIONS)
 
 .PHONY: build
 build:
