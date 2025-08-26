@@ -1,0 +1,32 @@
+services:
+  web:
+    build: .
+    volumes:
+      - app_data:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env.dev
+    networks:
+      - backend
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=bookstore_dev
+      - POSTGRES_PASSWORD=bookstore_dev
+      - POSTGRES_DB=bookstore_dev_db
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  app_data:
